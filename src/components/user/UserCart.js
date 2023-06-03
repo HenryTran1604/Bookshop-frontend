@@ -162,7 +162,7 @@ const UserCart = () => {
                   <Link to="/checkout" className="btn btn-primary float-end">
                     Make Purchase <IconChevronRight className="i-va" />
                   </Link>
-                  <Link to="/" className="btn btn-secondary">
+                  <Link to="/books" className="btn btn-secondary">
                     <IconChevronLeft className="i-va" /> Continue shopping
                   </Link>
                 </div>

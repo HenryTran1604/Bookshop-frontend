@@ -32,7 +32,16 @@ function Header() {
                         <div className="row">
                             <div className="custom_div col-lg-1 col-sm-3 col-3 order-1">
                                 <div className="custom_div logo_container">
-                                    <Link to="/"><img className="logo" src="/static/web-images/bookshop.png" /></Link>
+                                    {user.role === 'admin' ? (
+                                        <Link to="/admin/books">
+                                            <img className="logo" src="/static/web-images/bookshop.png" />
+                                        </Link>
+                                    ) : (
+                                        <Link to="/books">
+                                            <img className="logo" src="/static/web-images/bookshop.png" />
+                                        </Link>
+                                    )}
+
                                 </div>
                             </div>
                             <div className="custom_div col-lg-8 col-sm-6 order-lg-2 order-3 text-lg-left text-right">
@@ -44,7 +53,10 @@ function Header() {
                                 <p>Xin chào {user.fullName}</p>
                             </div>
                             <div className="custom_div col-lg-1 col-sm-1 order-4">
-                                <img className="user" src="/static/web-images/user.png" />
+                                
+                                    <Link to="/profile">
+                                        <img className="user standard_dropdown main_nav_dropdown" src="/static/web-images/user.png"/>
+                                    </Link>
                             </div>
                         </div>
                     </div>
@@ -104,7 +116,7 @@ function Header() {
                                             <div className="custom_div cart_count"><span>3</span></div>
                                         </div>
                                         <div className="custom_div cart_content">
-                                            <div className="custom_div cart_text"><Link to="#">Cart</Link></div>
+                                            <div className="custom_div cart_text"><Link to="/cart">Cart</Link></div>
                                             <div className="custom_div cart_price">$185</div>
                                         </div>
                                     </div>

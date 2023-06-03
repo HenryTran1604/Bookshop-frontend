@@ -16,6 +16,7 @@ const UserCategories = lazy(() => import("../../components/user/UserCategories")
 
 const UserBooksView = () => {
   const [books, setBooks] = useState([])
+  const [number, setNumber] = useState()
   const [search, setSearch] = useState('')
   const [view, setView] = useState("list")
   useEffect(() => {
@@ -38,7 +39,6 @@ const UserBooksView = () => {
         .then((response) => response.json())
         .then((books) => {
           setBooks(books)
-          console.log(books)
         })
         .catch((err) => console.log(err))
     }
@@ -85,7 +85,7 @@ const UserBooksView = () => {
             <div className="row">
               <div className="col-7">
                 <span className="align-middle fw-bold">
-                  {books.length} results for{" "}
+                  Results for{" "}
                   <span className="text-warning">{search === '' ? 'all book' : search}</span>
                 </span>
               </div>

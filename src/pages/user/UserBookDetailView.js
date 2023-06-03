@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate, json } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import CardServices from "../../components/user/UserBookCardService";
 import UserComment from "../../components/user/UserComment";
 import Header from "../../components/Header";
@@ -19,10 +19,10 @@ const UserBookDetail = () => {
     const user = JSON.parse(sessionStorage.getItem('user'))
 
     const [book, setBook] = useState([])
-    const [number, setNumber] = useState(1)
+    const [boughtQuantity, setNumber] = useState(1)
     const [comments, setComments] = useState([])
     const [myComment, setMyCommnet] = useState('')
-    const [stars, setStars] = useState(1)
+    const [stars, setStars] = useState(5)
     const { id } = useParams()
 
     useEffect(() => {
@@ -45,8 +45,8 @@ const UserBookDetail = () => {
 
     const handleChange = (event) => {
         const name = event.target.name
-        if (name === "decrease") setNumber(number - 1 >= 0 ? number - 1 : 0)
-        else setNumber(number + 1)
+        if (name === "decrease") setNumber(boughtQuantity - 1 >= 0 ? boughtQuantity - 1 : 0)
+        else setNumber(boughtQuantity + 1)
     }
     // get current date
     const currentDate = new Date();
@@ -88,7 +88,7 @@ const UserBookDetail = () => {
                         <div className="row mb-3">
                             <div className="col-md-5 text-center">
                                 <img style={{ width: "250px" }}
-                                    src={book.imageUrl == "null" ? 'https://placehold.co/225x350' : book.imageUrl}
+                                    src={book.imageUrl === "null" ? 'https://placehold.co/225x350' : book.imageUrl}
                                     className="img-fluid mb-3"
                                     alt=""
                                 />
@@ -146,7 +146,7 @@ const UserBookDetail = () => {
                                             <button name="decrease" className="btn btn-primary text-white" onClick={handleChange}>
                                                 <FontAwesomeIcon icon={faMinus} />
                                             </button>
-                                            <input type="number" className="form-control" value={number} onChange={handleChange} />
+                                            <input type="boughtQuantity" className="form-control" value={boughtQuantity} onChange={handleChange} />
                                             <button name="increase" className="btn btn-primary text-white" onClick={handleChange}>
                                                 <FontAwesomeIcon icon={faPlus} />
                                             </button>
@@ -203,11 +203,11 @@ const UserBookDetail = () => {
                                             <div className="comment-box ml-2">
                                                 <h4>Add a comment</h4>
                                                 <div className="rating">
-                                                    <input type="radio" name="rating" value={5} id="5" onChange={(e) => setStars(e.target.value)} /><label htmlFor="5">☆</label>
+                                                    <input type="radio" name="rating" value={5} id="5" onChange={(e) => setStars(e.target.value)} checked/><label htmlFor="5">☆</label>
                                                     <input type="radio" name="rating" value={4} id="4" onChange={(e) => setStars(e.target.value)} /><label htmlFor="4">☆</label>
                                                     <input type="radio" name="rating" value={3} id="3" onChange={(e) => setStars(e.target.value)} /><label htmlFor="3">☆</label>
                                                     <input type="radio" name="rating" value={2} id="2" onChange={(e) => setStars(e.target.value)} /><label htmlFor="2">☆</label>
-                                                    <input type="radio" name="rating" value={1} id="1" onChange={(e) => setStars(e.target.value)} checked /><label htmlFor="1">☆</label>
+                                                    <input type="radio" name="rating" value={1} id="1" onChange={(e) => setStars(e.target.value)} /><label htmlFor="1">☆</label>
                                                 </div>
                                                 <div className="">
                                                     <textarea className="form-control" placeholder="what is your view?" rows="4"

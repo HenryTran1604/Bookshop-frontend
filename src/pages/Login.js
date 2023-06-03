@@ -7,10 +7,14 @@ import axios from 'axios';
 
 
 function Login() {
+    const user = sessionStorage.getItem('user')
+    const navigate = useNavigate()
+    if(user !== null) {
+        window.location.href = "/books"
+    }
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('')
-    const navigate = useNavigate()
     const wrapper = { 
         background: "#fff",
         borderRadius: "10px",
