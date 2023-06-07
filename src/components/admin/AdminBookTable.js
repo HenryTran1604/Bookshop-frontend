@@ -3,20 +3,18 @@ import { Table } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from "react-router-dom";
 
-function BookTable() {
+function AdminBookTable() {
     const [books, setBooks] = useState([])
     const [search, setSearch] = useState('')
-    const navigate = useNavigate()
-    useEffect(() => {
+    const fetchBooks = () => {
         fetch('http://localhost:8081/api/books')
             .then((response) => response.json())
             .then((books) => setBooks(books))
             .catch((err) => console.log(err))
-    }, []);
-    console.log(books)
-    const handleInputChange = (e) => {
-        setSearch(e.target.value)
     }
+    useEffect(() => {
+        fetchBooks()
+    }, []);
     const handleSearch = () => {
         if (search !== '') {
             console.log('http://localhost:8081/api/book/search?key=' + `${search}`)
@@ -38,9 +36,14 @@ function BookTable() {
                     "Authorization": "Bearer your_access_token"
                 }
             })
-            .then(response => response.json())
-            .catch(err => console.log(err))
-            window.location.href="/admin/books"
+                .then(response => {
+                    if (response.ok) {
+                        fetchBooks();
+                    } else {
+                        console.error('Failed to delete book');
+                    }
+                })
+                .catch(err => console.log(err))
         }
     }
 
@@ -50,7 +53,7 @@ function BookTable() {
             <div className="container-fluid" style={{ marginTop: "20px" }}>
                 <div className="table-header">
                     <div className="input-group mb-3">
-                        <input type="text" className="form-control" placeholder="Search book by title..." onChange={handleInputChange}/>
+                        <input type="text" className="form-control" placeholder="Search book by title..." onChange={(e) => setSearch(e.target.value)} />
                         <div className="input-group-append">
                             <button className="btn btn-outline-secondary" type="button" onClick={handleSearch}>Search</button>
                         </div>
@@ -86,8 +89,10 @@ function BookTable() {
                                     {/* <td> <img style={{maxWidth: "200px"}} src={book.imageUrl}/></td> */}
 
                                     <td>
-                                        <Link to = {{pathname: `/admin/book/${book.id}`,
-                                                     state: {data: book}}} className="btn btn-outline-primary mx-2">View</Link>
+                                        <Link to={{
+                                            pathname: `/admin/book/${book.id}`,
+                                            state: { data: book }
+                                        }} className="btn btn-outline-primary mx-2">View</Link>
                                         <button className="btn btn-outline-danger" onClick={() => Delete(book.id)}>Delete</button>
                                     </td>
                                 </tr>
@@ -100,4 +105,4 @@ function BookTable() {
         </>
     )
 }
-export default BookTable
+export default AdminBookTable

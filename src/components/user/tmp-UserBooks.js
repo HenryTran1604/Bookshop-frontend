@@ -3,28 +3,29 @@ import { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTh, faBars } from "@fortawesome/free-solid-svg-icons";
-import UserReview from "../../components/user/UserReview";
-import UserBookCardList from "../../components/user/UserBookCardList";
-import UserBookCardGrid from "../../components/user/UserBookCardGrid"
+import UserReview from "./UserReview";
+import UserBookCardList from "./UserBookCardList";
+import UserBookCardGrid from "./UserBookCardGrid"
 
-import UserBookCardServices from '../../components/user/UserBookCardService'
-import Header from "../../components/Header";
+import UserBookCardServices from './UserBookCardService'
+import Header from "../Header";
 // const Paging = lazy(() => import("../../components/Paging"));
-const UserCategories = lazy(() => import("../../components/user/UserCategories"));
+const UserCategories = lazy(() => import("./UserCategories"));
 
 
 
-const UserBooksView = () => {
-  const [books, setBooks] = useState([])
-  const [number, setNumber] = useState()
+const UserBooks = ({data, filter}) => {
+  const books = data
   const [search, setSearch] = useState('')
   const [view, setView] = useState("list")
-  useEffect(() => {
-    fetch('http://localhost:8081/api/books')
-      .then((response) => response.json())
-      .then((books) => setBooks(books))
-      .catch((err) => console.log(err))
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://localhost:8081/api/books')
+  //     .then((response) => response.json())
+  //     .then((books) => setBooks(books))
+  //     .catch((err) => console.log(err))
+  // }, []);
+  console.log(books)
+
 
   const handleSearch = () => {
     if (search !== '') {
@@ -38,7 +39,6 @@ const UserBooksView = () => {
     }
   }
 
-
   const onChangeView = (view) => {
     setView(view);
   };
@@ -46,19 +46,6 @@ const UserBooksView = () => {
 
   return (
     <React.Fragment>
-      <Header />
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb rounded-0">
-          <li className="breadcrumb-item">
-            <Link to="/books" title="Home">
-              Home
-            </Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            All books
-          </li>
-        </ol>
-      </nav>
       <div className="container-fluid mb-3">
         <div className="row">
           <div className="col-md-3">
@@ -71,11 +58,11 @@ const UserBooksView = () => {
               <div className="col-7">
                 <span className="align-middle fw-bold">
                   Results for{" "}
-                  <span className="text-warning">{search === '' ? 'all book' : search}</span>
+                  <span className="text-warning">{filter}</span>
                 </span>
               </div>
               <div className="col-5 d-flex justify-content-end">
-                <input type="text" className="form-control" placeholder="Search book by title..." onChange={(e) => setSearch(e.target.value)} />
+                <input type="text" className="form-control" placeholder="Search book by title..." onChange={handleInputChange} />
                 <div className="input-group-append">
                   <button className="btn btn-outline-secondary" type="button" onClick={handleSearch}>Search</button>
                 </div>
@@ -145,4 +132,4 @@ const UserBooksView = () => {
 
 }
 
-export default UserBooksView;
+export default UserBooks;

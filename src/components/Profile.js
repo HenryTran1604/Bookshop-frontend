@@ -32,8 +32,7 @@ const Profile = () => {
     if (user === null) {
         navigate("/")
     }
-
-
+      
     const handleChange = (event) => {
         const { name, value } = event.target;
         setUser((prevUser) => ({ ...prevUser, [name]: value }));
@@ -74,6 +73,7 @@ const Profile = () => {
             formData.append('avatarUrl', user.avatarUrl);
             formData.append('role', user.role);
             formData.append('active', user.active);
+            console.log(user)
             try {
                 const response = await axios.put(
                     'http://localhost:8081/api/user/save/' + id,
@@ -85,7 +85,7 @@ const Profile = () => {
                     }
                 );
                 sessionStorage.removeItem('user')
-                sessionStorage.setItem('user', JSON.stringify(user))
+                sessionStorage.setItem('user', JSON.stringify(response.data))
                 navigate("/books");
             } catch (error) {
                 // setMessage(error.response.data);
@@ -134,7 +134,7 @@ const Profile = () => {
                                     <Row>
                                         <Form.Group className="mt-3">
                                             <Form.Label>Username <span className="text-danger">*</span></Form.Label>
-                                            <Form.Control type="text" name="fullName" placeholder="Nhập họ và tên" value={user.username} readOnly/>
+                                            <Form.Control type="text" name="username" value={user.username} disabled/>
                                         </Form.Group>
 
                                     </Row>
@@ -147,19 +147,19 @@ const Profile = () => {
                                     </Row>
                                     <Row>
                                         <Form.Group className="mt-3">
-                                            <Form.Label>Mật khẩu cũ<span className="text-danger">*</span></Form.Label>
-                                            <Form.Control type="password" name="password" value={oldPassword} placeholder="Nhập mật khẩu" onChange={(e) => setOldPassword(e.target.value)} required />
+                                            <Form.Label>Mật khẩu cũ <span className="text-danger">*</span></Form.Label>
+                                            <Form.Control type="password" name="password" value={oldPassword} placeholder="Nhập mật khẩu cũ" onChange={(e) => setOldPassword(e.target.value)} required />
                                         </Form.Group>
                                     </Row>
                                     <Row>
                                         <Form.Group className="mt-3">
-                                            <Form.Label>Mật khẩu mới<span className="text-danger">*</span></Form.Label>
-                                            <Form.Control type="password" name="password" value={newPassword} placeholder="Nhập mật khẩu" onChange={(e) => setNewPassword(e.target.value)} required />
+                                            <Form.Label>Mật khẩu mới <span className="text-danger">*</span></Form.Label>
+                                            <Form.Control type="password" name="password" value={newPassword} placeholder="Nhập mật khẩu mới" onChange={(e) => setNewPassword(e.target.value)} required />
                                         </Form.Group>
                                     </Row>
                                     <Row>
                                         <Form.Group className="mt-3">
-                                            <Form.Label>Xác nhận lại mật khẩu<span className="text-danger">*</span></Form.Label>
+                                            <Form.Label>Xác nhận lại mật khẩu <span className="text-danger">*</span></Form.Label>
                                             <Form.Control type="password" name="confirmed-password" valur={confirmedPassword} placeholder="Nhập lại mật khẩu" onChange={(e) => setConfirmedPassword(e.target.value)} required />
                                         </Form.Group>
                                     </Row>

@@ -55,7 +55,7 @@ const AdminCategoryDetail = () => {
             });
           
             console.log(response.data); // Xử lý phản hồi từ backend
-            navigate("/categories")
+            navigate("/admin/categories")
           } catch (error) {
             setMessage(error.response.data);
           }
@@ -65,7 +65,7 @@ const AdminCategoryDetail = () => {
 
     return (
         <div style={myStyle}>
-            <Link to="/categories" className="btn btn-light">Back to home</Link>
+            <Link to="/admin/categories" className="btn btn-light">Back to home</Link>
             <div className="d-flex container justify-content-center">
                 <div className="card w-75">
                     <div className="card-header text-center font-weight-bold">

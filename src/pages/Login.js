@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Form, Row, Container, Button } from "react-bootstrap";
+import { Form, Row, Container } from "react-bootstrap";
 import '../assets/css/login.css'
 import '../assets/css/responsive.css'
 import { useNavigate } from "react-router-dom";
@@ -89,11 +89,11 @@ function Login() {
                                 <Form className="login-form border-right-0">
                                     <Form.Group className="form-group">
                                         <Form.Label htmlFor="exampleForm.ControlEmail1" className="text-uppercase">Username</Form.Label>
-                                        <Form.Control type="text" placeholder="" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}}/>
+                                        <Form.Control type="text" placeholder="" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} required/>
                                     </Form.Group>
                                     <Form.Group className="form-group">
                                         <Form.Label htmlFor="exampleForm.ControlPassword1" className="text-uppercase">Password</Form.Label>
-                                        <Form.Control type="password" placeholder="" name="password" value={password} onChange={(e) => {setPassword(e.target.value)}}/>
+                                        <Form.Control type="password" placeholder="" name="password" value={password} onChange={(e) => {setPassword(e.target.value)}} required/>
                                     </Form.Group>
 
                                     <Form.Check>

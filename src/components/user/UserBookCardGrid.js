@@ -5,13 +5,13 @@ import { ReactComponent as IconStarFill } from "bootstrap-icons/icons/star-fill.
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 
-const CardProductGrid = (props) => {
+const UserBookCardGrid = (props) => {
     
     const book = props.data;
     const discount = Math.floor(Math.random() * 10)
     return (
         <div className="card">
-            <img src={book.imageUrl == "null" ?  'https://placehold.co/225x350' : book.imageUrl} className="card-img-top mx-auto" 
+            <img src={book.imageUrl === "null" ?  'https://placehold.co/225x350' : book.imageUrl} className="card-img-top mx-auto" 
             style={{height: "350px", width: "225px"}}/>
             <span className="badge bg-success position-absolute mt-2 ms-2">
                 New
@@ -37,13 +37,13 @@ const CardProductGrid = (props) => {
                     </span>
                 </div>
                 <div className="btn-group  d-flex" role="group">
-                    <button
+                    <Link to={`/bookdetail/${book.id}`}
                         type="button"
                         className="btn btn-sm btn-primary"
                         title="Add to cart"
                     >
                         <FontAwesomeIcon icon={faCartPlus} />
-                    </button>
+                    </Link>
                     <button
                         type="button"
                         className="btn btn-sm btn-outline-secondary"
@@ -57,4 +57,4 @@ const CardProductGrid = (props) => {
     );
 };
 
-export default CardProductGrid;
+export default UserBookCardGrid;

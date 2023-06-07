@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { ReactComponent as IconStarFill } from "bootstrap-icons/icons/star-fill.svg";
 import { ReactComponent as IconTruckFill } from "bootstrap-icons/icons/truck.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 
-const BookCard = (props) => {
+const UserBookCardList = (props) => {
   const discount = Math.floor(Math.random() * 10);
   const book = props.data
   return (
@@ -26,7 +25,7 @@ const BookCard = (props) => {
             <div>
               {book.rate > 0 &&
                 Array.from({ length: 5 }, (_, key) => {
-                  if (key <= book.rate)
+                  if (key < book.rate)
                     return (
                       <IconStarFill className="text-warning me-1" key={key} />
                     );
@@ -52,10 +51,10 @@ const BookCard = (props) => {
               </span>
             </div>
             <div className="mb-2">
-              <span className="fw-bold h6">{book.sold + " sold"}</span>
+              <span className="fw-bold h6">{"Đã bán " + book.sold}</span>
             </div>
             <p className="text-success small mb-2">
-              <IconTruckFill /> Free shipping
+              <IconTruckFill /> Miễn phí ship
             </p>
 
             <div className="btn-group d-flex" role="group">
@@ -81,4 +80,4 @@ const BookCard = (props) => {
   );
 };
 
-export default BookCard;
+export default UserBookCardList;
