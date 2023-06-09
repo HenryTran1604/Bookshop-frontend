@@ -4,7 +4,7 @@ import { ReactComponent as IconCheckCircleFill } from "bootstrap-icons/icons/che
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const UserComment = ({ data, userId, fetchComments}) => {
+const UserComment = ({ data, user, fetchComments}) => {
   const comment = data;
   const handleDeleteComment = () => {
     if (window.confirm('Bạn có muốn xóa bình luận này không?')) {
@@ -50,7 +50,7 @@ const UserComment = ({ data, userId, fetchComments}) => {
         <button className="btn btn-sm btn-outline-danger me-2">
           <FontAwesomeIcon icon={faThumbsDown} /> 5
         </button>
-        {userId === comment.user.id && (
+        {(user.id === comment.user.id || user.role === 'admin') && (
           <>
             <button type="button" className="btn btn-sm btn-outline-secondary me-2">
               <FontAwesomeIcon icon={faEdit} />

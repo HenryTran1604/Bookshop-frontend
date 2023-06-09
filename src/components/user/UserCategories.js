@@ -10,7 +10,6 @@ const UserCategories = () => {
             .then((categories) => setCategories(categories))
             .catch((err) => console.log(err))
     }, []);
-    console.log(categories)
     return (
         <div className="card mb-3 accordion">
             <div
@@ -26,7 +25,7 @@ const UserCategories = () => {
                 {
                     categories.map((category, index) => (
                         <li key = {index} className="list-group-item">
-                            <Link to="/" className="text-decoration-none stretched-link">
+                            <Link to={`/category/${category.id}/books`} className="text-decoration-none stretched-link">
                                 {category.categoryName}
                             </Link>
                         </li>

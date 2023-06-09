@@ -29,7 +29,7 @@ const UserBookCardGrid = (props) => {
                     </Link>
                 </h6>
                 <div className="my-2">
-                    <span className="fw-bold h5">${book.price}</span>
+                    <span className="fw-bold h5">VND {book.price}</span>
                     <span className="ms-2">
                         {Array.from({ length: book.rate }, (_, key) => (
                             <IconStarFill className="text-warning me-1" key={key} />
