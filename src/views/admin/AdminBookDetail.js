@@ -161,6 +161,7 @@ const AdminBookDetail = () => {
                     <Form.Group className="col-md-6 mt-3">
                       <Form.Label>Thể loại</Form.Label>
                       <Form.Select as="select" name="category" value={book.category ? book.category.id : 0} disabled={disabled} onChange={handleChange}>
+                      <option value={null}>Chọn thể loại</option>
                         {categories.map((category, index) => (
                           <option key={category.id} value={category.id}>
                             {category.categoryName}
